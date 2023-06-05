@@ -15,7 +15,7 @@ class UserRegistrationAPIView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            UserServices.register(serializer.validated_data['name'], serializer.validated_data['password'], serializer.validated_data['email'])
+            UserServices.register_user(serializer.validated_data['name'], serializer.validated_data['password'], serializer.validated_data['email'])
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -28,7 +28,7 @@ class UserLoginAPIView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            token = UserServices.login(serializer.validated_data['email'], serializer.validated_data['password'])
+            token = UserServices.login_user(serializer.validated_data['email'], serializer.validated_data['password'])
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -42,7 +42,7 @@ class UserLogoutAPIView(APIView):
             return Response({'error': 'Please provide a valid token.'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            UserServices.logout(token)
+            UserServices.logout_user(token)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

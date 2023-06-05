@@ -6,6 +6,7 @@ class UserServices:
     def register_user(request):
         user = Users.objects.create_user(name= request. data. name, email= request.data.email, password= request.data.password)
         user.save()
+        return user
 
     
     def login_user(request):

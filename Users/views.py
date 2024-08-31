@@ -8,6 +8,8 @@ from Users.services.user_services import UserServices
 from Users.serializers import UserSerializer
 
 
+
+
 class UserRegistrationAPIView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
